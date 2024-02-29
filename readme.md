@@ -5,7 +5,7 @@
 ### Implementation:
 As discussed in the references mentioned above, we are aware of the theoretical safeguards associated with Stochastic Gradient (SG) and batch methods. In this context, we are exploring an implementation using a strongly convex problem—specifically, the L2 regularized logistic problem.
 \begin{equation}
-\text{minimize } x \in \mathbb{R}^p \left( \frac{\lambda}{2} ||x||^2 + \frac{1}{n} \sum_{i=1}^{n} \log(1 + \exp(-b_i a_i^T x)) \right)
+\underset{x \in \mathbb{R}^p }{minimize} \left( \frac{\lambda}{2} ||x||^2 + \frac{1}{n} \sum_{i=1}^{n} \log(1 + \exp(-b_i a_i^T x)) \right)
 \end{equation}
 
 ### Dataset 
