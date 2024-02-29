@@ -10,7 +10,7 @@ As discussed in the references mentioned above, we are aware of the theoretical 
 
 ### Dataset 
 At the outset, we initialize the dataset and labels as visualized in the graph. Subsequently, parameters are randomly initialized within the quadrant. As the training commences, the optimization process gradually shifts toward the center of the second quadrant. To visually represent this progression, varying transparencies are applied. Furthermore, the normalization of the parameter norm is implemented according to our objective function. This ensures that as the norm approaches zero, it remains distinctly visible.
-![Lid-Driven](./image/data_distribution_searching_process.png)
+![Lid-Driven](./image/data_distribution_searchingprocess.png)
 
 ### Logarithmic axis
 It is evident that the batch method exhibits superior convergence values when compared to the Stochastic Gradient (SG) method. Additionally, the Stochastic Gradient method demonstrates improved convergence with a larger number of training points. This enhancement arises because, in the SG method, the batch size limits the number of points being optimized. Consequently, in subsequent rounds, the previous gradient information is overwritten by the newly chosen data points, affecting the optimization process.
