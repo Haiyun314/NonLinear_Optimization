@@ -46,7 +46,7 @@ data_n = data[mask0][:, :2]
 lambda_ = 1  # Regularization parameter
 
 # Gradient descent
-num_iterations = 200  # Number of iterations
+num_iterations = 5000  # Number of iterations
 alpha = 0.1  # Learning rate
 n = 2 # freature dimention
 theta = np.random.random((n, 1))  # Parameters
@@ -84,8 +84,12 @@ def min_sg(num_iterations, batch_size):
         cost_sg.append(cost_function_reg(sg_theta, X, y, lambda_))
     return cost_sg, np.squeeze(sg_theta_record)
 
+
 bt, bt_theta_record = batch_method(num_iterations)
-sg, sg_theta_record = min_sg(num_iterations, 40)
+sg40, sg_theta_record = min_sg(num_iterations, 40)
+sg10, sg_theta_record = min_sg(num_iterations, 10)
+sg100, sg_theta_record = min_sg(num_iterations, 100)
+
 
 
 # plt.scatter(data_p[:,0], data_p[:, 1], c='r', alpha= 0.6)
@@ -97,13 +101,17 @@ sg, sg_theta_record = min_sg(num_iterations, 40)
 #     print(i)
 #     plt.plot([sg_theta_record[i*20][0], 0], [sg_theta_record[i*20][1], 0], c='r', alpha= 0.1 * (i+1))
 #     plt.plot([bt_theta_record[i*20][0], 0], [bt_theta_record[i*20][1], 0], c='g', alpha= 0.1 * (i+1))
-# plt.legend(['green: label 1, theta_batch', 'red: label -1, theta_sg'])
+# plt.legend(['label 1', 'label -1'])
 # plt.show()
+x = [i for i in range(len(bt))]
+plt.loglog(x, bt, c='r', alpha = 0.6)
+plt.loglog(x, sg10, c='g', alpha = 0.6)
+plt.loglog(x, sg40, c='b', alpha = 0.6)
+plt.loglog(x, sg100, c='y', alpha = 0.6)
 
-plt.plot([i for i in range(len(bt))], bt, c='r', alpha = 0.6)
-plt.plot([i for i in range(len(sg))], sg, c='g', alpha = 0.6)
-plt.xlabel('Iterations')
-plt.ylabel('Loss')
-plt.legend(['loss_batch', 'loss_sg'])
+
+plt.xlabel('Iterations (logarithmic scale)')
+plt.ylabel('Loss (logarithmic scale)')
+plt.legend(['loss_batch2000', 'loss_sg10', 'loss_sg40', 'loss_sg100'])
 plt.show()
 print(f"The optimized parameters are: {theta}")
