@@ -14,5 +14,8 @@ At the outset, we initialize the dataset and labels as visualized in the graph. 
 
 ### Logarithmic axis
 It is evident that the batch method exhibits superior convergence values when compared to the Stochastic Gradient (SG) method. Additionally, the Stochastic Gradient method demonstrates improved convergence with a larger number of training points. This enhancement arises because, in the SG method, the batch size limits the number of points being optimized. Consequently, in subsequent rounds, the previous gradient information is overwritten by the newly chosen data points, affecting the optimization process.
-![Lid-Driven](./image/loss.png)
+#### Empirical loss
+![Empirical loss](./image/loss.png)
 
+#### Expected loss
+![Expected loss](./image/expected_loss.png)

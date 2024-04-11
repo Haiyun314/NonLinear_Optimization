@@ -77,11 +77,18 @@ def min_sg(num_iterations, batch_size):
     for _ in range(num_iterations):
         np.random.shuffle(sg_data)
         sg_temp = sg_data[: batch_size]
+        X_empirical_loss, y_empirical_loss = sg_data[:, :2], sg_data[:, 2]
         X,y = sg_temp[:,:2], sg_temp[:,2]
         grad = gradient_reg(sg_theta, X, y, lambda_)
         sg_theta = sg_theta - alpha * grad
         sg_theta_record.append(sg_theta)
-        cost_sg.append(cost_function_reg(sg_theta, X, y, lambda_))
+        cost_sg.append(cost_function_reg(sg_theta, X_empirical_loss, y_empirical_loss, lambda_))
+        
+        # here i tested only the traning loss, because i only used the points for traning 
+        # to compute the loss while i should use all points
+
+        #further i should also test it with overall dataset to compute the empirical loss. 
+
     return cost_sg, np.squeeze(sg_theta_record)
 
 
@@ -110,8 +117,8 @@ plt.loglog(x, sg40, c='b', alpha = 0.6)
 plt.loglog(x, sg100, c='y', alpha = 0.6)
 
 
-plt.xlabel('Iterations (logarithmic scale)')
-plt.ylabel('Loss (logarithmic scale)')
+plt.xlabel('Iterations')
+plt.ylabel('Loss')
 plt.legend(['loss_batch2000', 'loss_sg10', 'loss_sg40', 'loss_sg100'])
 plt.show()
 print(f"The optimized parameters are: {theta}")
