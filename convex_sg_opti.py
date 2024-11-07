@@ -11,7 +11,7 @@ def cost_function_reg(theta, X, y, lambda_):
     cost = 1/m * np.sum(np.log(1 + np.exp(-y @ X @ theta)))
     reg_cost = cost + lambda_/(2) * np.sum(theta**2)
     return reg_cost
-
+ 
 def time_it(func):
     def inner(*args):
         start = time.perf_counter()
@@ -76,9 +76,9 @@ def min_sg(num_iterations, batch_size):
     cost_sg = []
     for _ in range(num_iterations):
         np.random.shuffle(sg_data)
-        sg_temp = sg_data[: batch_size]
-        X_empirical_loss, y_empirical_loss = sg_data[:, :2], sg_data[:, 2]
-        X,y = sg_temp[:,:2], sg_temp[:,2]
+        sg_temp = sg_data[: batch_size]  # randomly pick up "batch_size" number of points
+        X_empirical_loss, y_empirical_loss = sg_data[:, :2], sg_data[:, 2] # whole dataset
+        X,y = sg_temp[:,:2], sg_temp[:,2] # training set
         grad = gradient_reg(sg_theta, X, y, lambda_)
         sg_theta = sg_theta - alpha * grad
         sg_theta_record.append(sg_theta)
@@ -86,8 +86,7 @@ def min_sg(num_iterations, batch_size):
         
         # here i tested only the traning loss, because i only used the points for traning 
         # to compute the loss while i should use all points
-
-        #further i should also test it with overall dataset to compute the empirical loss. 
+        # further i should also test it with overall dataset to compute the empirical loss. 
 
     return cost_sg, np.squeeze(sg_theta_record)
 
@@ -96,7 +95,7 @@ bt, bt_theta_record = batch_method(num_iterations)
 sg40, sg_theta_record = min_sg(num_iterations, 40)
 sg10, sg_theta_record = min_sg(num_iterations, 10)
 sg100, sg_theta_record = min_sg(num_iterations, 100)
-
+print(sg10[-1], '\n', sg40[-1], '\n', bt[-1], '\n')
 
 
 # plt.scatter(data_p[:,0], data_p[:, 1], c='r', alpha= 0.6)
@@ -122,3 +121,4 @@ plt.ylabel('Loss')
 plt.legend(['loss_batch2000', 'loss_sg10', 'loss_sg40', 'loss_sg100'])
 plt.show()
 print(f"The optimized parameters are: {theta}")
+
