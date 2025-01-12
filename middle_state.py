@@ -72,3 +72,4 @@ if __name__ == '__main__':
         os.mkdir('image')
     plt.savefig('./image/hidden_layers.png')
     plt.show()
+
